@@ -8,10 +8,12 @@
 <body>
 	<script>
 	var snd = new Audio("GuilesTheme.mp3"); 
+	var flagPlayer1Selected = false;
 		$(document).ready(function(){
 			$('.characterSelectContainer').hide();
 			$('.characterImage').hide();
 			$('.versus').hide();
+			$('h1').hide();
 			$('.stageBtn').hover(
 				function(){
 					$('.wrapper').css('background-image',"url("+$(this).attr('data-alt-src')+")");
@@ -24,23 +26,41 @@
 					$('.characterSelectContainer').show();
 					$('.characterImage').show();
 					$('.wrapper').css('background-image',"url("+temp+")");
+					$('h1').html("Player 1");
+					$('h1').show();
 					
 			});
 			$('.characterBtn').hover(
 				function(){
-					$('.player').css('background-image',"url("+$(this).attr('data-alt-src')+"), linear-gradient(to bottom right, yellow, orange, orange)");
+				
+					if (flagPlayer1Selected == false){
+						$('.player').css('background-image',"url("+$(this).attr('data-alt-src')+"), linear-gradient(to bottom right, yellow, orange, orange)");
+					}
+					else{
+						$('.opponent').css('background-image',"url("+$(this).attr('data-alt-src')+"), linear-gradient(to bottom right, yellow, yellow, red, orange)");
 					
-				}
-			);
+					}
+				});
 			$('.characterBtn').click(
 				function(){
 					var temp = $(this).attr('data-char-name');
-					$('.characterSelectContainer').hide();
-					$('.player').css("margin-left", "400px");
-					$('.player .charName').html(temp);
-					$('.opponent').css("margin-left", "0px");
-					$('.versus').show();
-					snd.play();
+					if (flagPlayer1Selected == false){
+						$('.player .charName').html(temp);
+						$('.player').css('background-image',"url("+$(this).attr('data-alt-src')+"), linear-gradient(to bottom right, yellow, orange, orange)");
+						flagPlayer1Selected=true;
+						$('.charNum').html("Player 2");
+					}
+					else if(flagPlayer1Selected == true){
+						$('.opponent .charName').html(temp);
+						$('.opponent').css('background-image',"url("+$(this).attr('data-alt-src')+"), linear-gradient(to bottom right, yellow, orange, orange)");
+						$('.characterSelectContainer').hide();
+						$('.player').css("margin-left", "374px");
+						$('.opponent').css("margin-left", "0px");
+						$('.versus').show();
+						$('h1').hide();
+						snd.play();
+					}
+					
 			});
 				
 				
@@ -48,6 +68,7 @@
 		});
 	</script>
 	<div class = "wrapper">
+		<h1 class = "charNum"></span></h1>
 		<div class="stageSelectContainer">
 			<h2 class="stageSelectHeader">CHOOSE YOUR STAGE</h2>
 			<p class="stageBtn" data-alt-src = "img/beach.jpg">Beach</p>
@@ -68,7 +89,7 @@
 			<p class="characterBtn" data-alt-src = "img/guile.png" data-char-name="Guile">Guile</p>
 		</div>
 		<h3 class = "versus">VERSUS</h3>
-		<div class = "characterImage opponent"><h2>Leo</h2></div>
+		<div class = "characterImage opponent"><h2 class="charName"></h2></div>
 	</div>
 </body>
 </html>
