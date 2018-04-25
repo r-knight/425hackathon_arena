@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script src= 'https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<title>Arena</title>
+</head>
+<body>
+	<script>
+	var snd = new Audio("GuilesTheme.mp3"); 
+		$(document).ready(function(){
+			$('.characterSelectContainer').hide();
+			$('.characterImage').hide();
+			$('.versus').hide();
+			$('.stageBtn').hover(
+				function(){
+					$('.wrapper').css('background-image',"url("+$(this).attr('data-alt-src')+")");
+				}
+			);
+			$('.stageBtn').click(
+				function(){
+					var temp = $(this).attr('data-alt-src');
+					$('.stageSelectContainer').hide();
+					$('.characterSelectContainer').show();
+					$('.characterImage').show();
+					$('.wrapper').css('background-image',"url("+temp+")");
+					
+			});
+			$('.characterBtn').hover(
+				function(){
+					$('.player').css('background-image',"url("+$(this).attr('data-alt-src')+"), linear-gradient(to bottom right, yellow, orange, orange)");
+					
+				}
+			);
+			$('.characterBtn').click(
+				function(){
+					var temp = $(this).attr('data-char-name');
+					$('.characterSelectContainer').hide();
+					$('.player').css("margin-left", "400px");
+					$('.player .charName').html(temp);
+					$('.opponent').css("margin-left", "0px");
+					$('.versus').show();
+					snd.play();
+			});
+				
+				
+				
+		});
+	</script>
+	<div class = "wrapper">
+		<div class="stageSelectContainer">
+			<h2 class="stageSelectHeader">CHOOSE YOUR STAGE</h2>
+			<p class="stageBtn" data-alt-src = "img/beach.jpg">Beach</p>
+			<p class="stageBtn" data-alt-src = "img/dojo.jpg">Dojo</p>
+			<p class="stageBtn" data-alt-src = "img/earth.jpg">Earth</p>
+			<p class="stageBtn" data-alt-src = "img/forest.jpg">Forest</p>
+			<p class="stageBtn" data-alt-src = "img/matrix.jpg">Matrix</p>
+			<p class="stageBtn" data-alt-src = "img/snow.jpg">Snow</p>
+		</div>
+		<div class = "characterImage player"><h2 class="charName"></h2></div>
+		<div class="characterSelectContainer">
+			<h2 class="characterSelectHeader">CHOOSE YOUR CHARACTER</h2>
+			<p class="characterBtn" data-alt-src = "img/donny.png" data-char-name="Donny">Donny</p>
+			<p class="characterBtn" data-alt-src = "img/mikey.png" data-char-name="Mikey">Mikey</p>
+			<p class="characterBtn" data-alt-src = "img/raphael.png" data-char-name="Raphael">Raphael</p>
+			<p class="characterBtn" data-alt-src = "img/leo.png" data-char-name="Leo">Leo</p>
+			<p class="characterBtn" data-alt-src = "img/dog.jpg" data-char-name="Dog">Dog</p>
+			<p class="characterBtn" data-alt-src = "img/guile.png" data-char-name="Guile">Guile</p>
+		</div>
+		<h3 class = "versus">VERSUS</h3>
+		<div class = "characterImage opponent"><h2>Leo</h2></div>
+	</div>
+</body>
+</html>
